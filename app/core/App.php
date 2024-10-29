@@ -2,6 +2,8 @@
 
 class App 
 {
+  private $controller = 'Home';
+  private $method = 'index';
 
   private function splitURL()
   { 
@@ -18,12 +20,17 @@ class App
     if(file_exists($filename))
     {
       require $filename;
+      $this->controller = ucfirst($URL[0]);
     } else {
       $filename = "../app/controllers/_404.php";
       require $filename;
+      $this->controller = "_404";
     }
 
-    $home = new Home;
-    call_user_func_array([$home, 'index'], ['a' => 'somethis', 'b' => 'b something', 'c' => 'c something']);
+    // show($this->controller);
+
+    // $controller = new Home;
+    $controller = new $this->controller;
+    call_user_func_array([$controller, $this->method], []);
     }
 }
