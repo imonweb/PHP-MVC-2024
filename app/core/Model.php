@@ -61,7 +61,14 @@ class Model
 
   public function insert($data)
   {
+    $keys = array_keys($data);
 
+    $query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).") ";
+
+    // echo $query;
+    $this->query($query, $data);
+
+    return false;
   }
 
   public function update($id, $data, $id_column = 'id')
