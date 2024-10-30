@@ -4,11 +4,17 @@ Class Home extends Controller
 {
   public function index($a = '', $b = '', $c = '')
   {
-    echo "This is the home controller";
+    $model = new Model;
+    // $model->test();
+
+    // $arr['id'] = 2;
+    $arr['name'] = 'john';
+    // $arr2['date'] = date("Y");
+    $result = $model->where($arr);
+
+    show($result);
 
     $this->view('home');
   }
 }
 
-// $home = new Home;
-// call_user_func_array([$home, 'index'], ['a' => 'somethis', 'b' => 'b something', 'c' => 'c something']);
