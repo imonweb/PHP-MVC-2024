@@ -9,19 +9,23 @@ Class Home extends Controller
 
     // $arr['id'] = 2;
     // $arr2['date'] = date("Y");
+
     // where
     $arr['name'] = 'john';
     $result = $model->where($arr);
     show($result);
     
     // insert
+    /*
     $arr['name'] = 'john';
     $arr['age'] = 25;
-    // $arr['date'] = date("Y-m-d");
-    $insert = $model->insert($arr);
-    show($insert);
+    */
+    // $insert = $model->insert($arr);
+    // show($insert);
 
-
+    // delete
+    $result = $model->delete(3);
+    show($result);
 
     $this->view('home');
   }
