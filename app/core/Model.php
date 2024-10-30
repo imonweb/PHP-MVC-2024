@@ -1,12 +1,22 @@
 <?php 
 
-class Model
+Trait Model
 {
   use Database;
-  protected $table = 'users';
+
+  // protected $table = 'users';
+
   protected $limit = 10;
   protected $offset = 0;
 
+  public function findAll()
+  {
+    $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+
+    return $this->query($query);
+  }
+
+  /* ====== return multiple row of data ====== */
   public function where($data, $data_not = [])
   {
     $keys = array_keys($data);
@@ -31,6 +41,8 @@ class Model
     return $this->query($query, $data);
   }
 
+   
+  /* ====== return 1 row of data ====== */
   public function first($data, $data_not = [])
   {
     $keys = array_keys($data);
@@ -58,7 +70,8 @@ class Model
     
     return false;
   }
-
+   
+  /* ====== INSERT ====== */
   public function insert($data)
   {
     $keys = array_keys($data);
@@ -71,11 +84,31 @@ class Model
     return false;
   }
 
+   
+  /* ====== UPDATE ====== */
   public function update($id, $data, $id_column = 'id')
   {
+    
 
+    $keys = array_keys($data);
+    $query = "update $this->table set ";
+
+    foreach ($keys as $key){
+      $query .= $key . " = :" . $key . ", ";
+    }
+
+    $query = trim($query, ", ");
+
+    $query .= "  where $id_column = :$id_column ";
+
+    $data[$id_column] = $id;
+    // echo $query;
+    $this->query($query, $data);
+    return false;
   }
 
+   
+  /* ====== DELETE ====== */
   public function delete($id, $id_column = 'id')
   {
     $data[$id_column] = $id;
