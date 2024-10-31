@@ -6,7 +6,7 @@ Class Home extends Controller
   {
     $user = new User;
 
-    $result = $user->where(['id' => 2]);
+    $result = $user->findAll();
     show($result);
     $this->view('home');
   }
