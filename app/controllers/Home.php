@@ -1,13 +1,10 @@
 <?php 
 
-Class Home extends Controller
+Class Home 
 {
-  public function index($a = '', $b = '', $c = '')
+  use Controller;
+  public function index()
   {
-    $user = new User;
-
-    $result = $user->findAll();
-    show($result);
     $this->view('home');
   }
 }

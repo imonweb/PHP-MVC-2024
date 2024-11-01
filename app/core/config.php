@@ -10,3 +10,9 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 } else {
   /*  online */
 }
+
+define('APP_NAME', "My Webiste");
+define('APP_DESC', "Best website on the planet");
+
+/** true means show errors **/
+define('DEBUG', true);
